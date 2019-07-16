@@ -29,5 +29,5 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    compile group: 'log4j', name: 'log4j', version:'1.2.12'
+    compile group: 'log4j', name: 'log4j', version:'1.2.17-atlassian-1'
 }
