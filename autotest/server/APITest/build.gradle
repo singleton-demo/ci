@@ -1,6 +1,19 @@
-plugins {
-    // Apply the java plugin to add support for Java
-    id 'java'
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+jar {
+    baseName = 'apitest'
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -13,22 +26,16 @@ dependencies {
     compile group: 'com.github.virtuald', name: 'curvesapi', version:'1.04'
 }
 
-
-//create jar
-task taskJar(type:Jar, dependsOn: compileJava) {
-    from 'build/classes/java/main'
-	destinationDir = file('build/libs')
-}
-
-//clear the last file in destination
-task clearPJ(type:Delete) {
-    delete 'build','target'
-}
-
-//copy jar to destinationDir
-task release(type:Copy,dependsOn: [clearPJ,taskJar]) {
+task copy(type: Copy) {
     from('build/libs') {
 	    include '*.jar'
 	}
 	into ('target')
 }
+
+task copyDependencies(type: Copy, dependsOn: [copy]) {
+    from configurations.compile
+    into 'target'
+}
+
+build.dependsOn.add copyDependencies
