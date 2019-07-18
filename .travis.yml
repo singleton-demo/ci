@@ -18,7 +18,5 @@ jobs:
         - npm install typescript
         - tsc -v
         - python ./configsonar.py $SONAR_ORG:jsclient+' '+$TRAVIS_BRANCH $SONAR_ORG:jsclient:$TRAVIS_BRANCH $SONAR_ORG jsclientgate $SONAR_TOKEN
-        - cd server
-        - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:jsclient -Dsonar.projectKey=$SONAR_ORG:jsclient -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=$TRAVIS_BRANCH
-        - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:jsclient -BranchName=$TRAVIS_BRANCH
-    
+        - sonar-scanner -Dsonar.sources=. -Dsonar.projectName=$SONAR_ORG:jsclient -Dsonar.projectKey=$SONAR_ORG:jsclient -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=$TRAVIS_BRANCH
+        - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:jsclient -BranchName=$TRAVIS_BRANCH
