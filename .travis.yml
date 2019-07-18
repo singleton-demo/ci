@@ -16,7 +16,7 @@ jobs:
     - stage: code scan
       script:
       - python ./configsonar.py $SONAR_ORG:javaclient5' '$TRAVIS_BRANCH $SONAR_ORG:javaclient5:$TRAVIS_BRANCH $SONAR_ORG javaclientgate $SONAR_TOKEN
-      - gradle sonarqube --stacktrace -Dsonar.projectName=$SONAR_ORG:javaclient5 -Dsonar.projectKey=$SONAR_ORG:javaclient5 -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
+      - gradle sonarqube --stacktrace -Dsonar.projectKey=singleton:javaclient5:java-client -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
       - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclient -BranchName=$TRAVIS_BRANCH
     - stage: smoke test
       script:
