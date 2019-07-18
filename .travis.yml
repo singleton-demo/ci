@@ -10,13 +10,27 @@ service:
   - docker
 jobs:
   include:
-    - stage: unit test
+    # - stage: unit test
+    #   script:
+    #   - cd client
+    #   - gradle build
+    # - stage: code scan
+    #   script:
+    #   - python ./configsonar.py $SONAR_ORG:javaclient+' '+$TRAVIS_BRANCH $SONAR_ORG:javaclient:$TRAVIS_BRANCH $SONAR_ORG javaclientgate $SONAR_TOKEN
+    #   - cd server
+    #   - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:javaclient -Dsonar.projectKey=$SONAR_ORG:javaclient -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=$TRAVIS_BRANCH
+    #   - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton -BranchName=$TRAVIS_BRANCH
+    - stage: smoke test
       script:
-      - cd client
-      - gradle build
-    - stage: code scan
-      script:
-      - python ./configsonar.py $SONAR_ORG:javaclient+' '+$TRAVIS_BRANCH $SONAR_ORG:javaclient:$TRAVIS_BRANCH $SONAR_ORG javaclientgate $SONAR_TOKEN
-      - cd server
-      - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:javaclient -Dsonar.projectKey=$SONAR_ORG:javaclient -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=$TRAVIS_BRANCH
-      - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton -BranchName=$TRAVIS_BRANCH
+      - git clone --branch=server https://github.com/singleton-demo/ci.git server
+      - cd ./server/build && jar -cvf0m service.jar ./META-INF/MANIFEST.MF ./org/ ./BOOT-INF/ ./resources.zip
+      - cp service.jar ../
+      - cd ..
+      - docker build -t singleton .
+      - docker run -d -p 8090:8090 --name singleton singleton
+      - docker ps
+      - cd ..
+      - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
+      - cp ./build/*.jar ./devops/autotest/client/java/lib/
+      - cd ./devops/autotest/client/java && gradle build
+      - java -cp './target/*' org.testng.TestNG -d test-output testng.xml
