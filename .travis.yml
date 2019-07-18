@@ -33,4 +33,5 @@ jobs:
       - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
       - cp ./build/*.jar ./devops/autotest/client/java/lib/
       - cd ./devops/autotest/client/java && gradle build
+      - docker cp l10n singleton:/
       - java -cp './target/*' org.testng.TestNG -d test-output ./target/testng.xml
