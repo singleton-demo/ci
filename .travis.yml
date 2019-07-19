@@ -20,3 +20,13 @@ jobs:
         - python ./configsonar.py $SONAR_ORG:singleton' '$TRAVIS_BRANCH $SONAR_ORG:singleton:$TRAVIS_BRANCH $SONAR_ORG jsclientgate $SONAR_TOKEN
         - sonar-scanner -Dsonar.sources=. -Dsonar.projectName=$SONAR_ORG:singleton' '$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.login=$SONAR_TOKEN
         - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton -BranchName=$TRAVIS_BRANCH
+    - stage: unit test
+      script:
+        - npm install --registry https://registry.npmjs.org
+        - npm run test
+    - stage: auto test
+      script:
+        - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
+        - npm install --registry https://registry.npmjs.org
+        - chmod +x node_modules/.bin/jest
+        - ./node_modules/.bin/jest
