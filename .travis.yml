@@ -15,9 +15,9 @@ jobs:
     #   - gradle build
     - stage: code scan
       script:
-      #- python ./configsonar.py $SONAR_ORG:javaclient7' '$TRAVIS_BRANCH $SONAR_ORG:javaclient7:$TRAVIS_BRANCH $SONAR_ORG javaclientgate $SONAR_TOKEN
-      - gradle sonarqube --stacktrace -Dsonar.projectName=singleton-test111:$TRAVIS_BRANCH -Dsonar.branch.name=master -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
-      - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclient -BranchName=$TRAVIS_BRANCH
+      # - python ./configsonar.py $SONAR_ORG:javaclient' '$TRAVIS_BRANCH $SONAR_ORG:javaclient:$TRAVIS_BRANCH $SONAR_ORG javaclientgate $SONAR_TOKEN
+      - gradle sonarqube --stacktrace -Dsonar.projectName=$SONAR_ORG:javaclientdebug -Dsonar.projectKey=$SONAR_ORG:javaclientdebug -Dsonar.branch=$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
+      - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclientdebug -BranchName=$TRAVIS_BRANCH
     # - stage: smoke test
     #   script:
     #   - git clone --branch=server https://github.com/singleton-demo/ci.git server
