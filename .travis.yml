@@ -24,9 +24,11 @@ jobs:
       script:
         - npm install --registry https://registry.npmjs.org
         - npm run test
+        - npm link
     - stage: auto test
       script:
         - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
+        - cd test/client/jscoresdk
         - npm install --registry https://registry.npmjs.org
-        - chmod +x node_modules/.bin/jest
+        - npm link  @vip/vip-core-sdk
         - ./node_modules/.bin/jest
