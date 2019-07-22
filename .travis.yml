@@ -17,7 +17,7 @@ jobs:
       script:
        - python ./configsonar.py $SONAR_ORG:Java-client:$TRAVIS_BRANCH $SONAR_ORG:Java-client:$TRAVIS_BRANCH $SONAR_ORG javaclientgate2 $SONAR_TOKEN
       # - sonar-scanner -Dsonar.java.source=./src -Dsonar.projectName=$SONAR_ORG:javaclientdebug' '$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:javaclientdebug:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
-      - gradle sonarqube --stacktrace -Dsonar.ProjectKey=$SONAR_ORG:Java-client:$TRAVIS_BRANCH -Dsonar.ProjectName=$SONAR_ORG:Java-client:$TRAVIS_BRANCH -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master
+      - gradle sonarqube --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master
       - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclientdebug -BranchName=$TRAVIS_BRANCH
     # - stage: smoke test
     #   script:
