@@ -27,26 +27,26 @@ type Condition struct {
 
 var(
 	hostName string
-	queryProjectKeys string
+	queryProjectKeyPrefixArray string
 	queryBranchName string
 )
 
 func main() {
 
-	flag.StringVar(&queryProjectKeys,"ProjectKeys","","Query Project Keys,Separated by commas, etc projectA,projectB")
+	flag.StringVar(&queryProjectKeyPrefixArray,"ProjectKeyPrefixArray","","Query Project Key Prefix,Separated by commas, etc projectA,projectB")
 	flag.StringVar(&queryBranchName,"BranchName","","Branch Name,etc master")
 	flag.StringVar(&hostName,"HostName","sonarcloud.io","SonarQube host name")
 
 	flag.Parse()
 
-	projectKeys := strings.Split(queryProjectKeys,",")
+	projectKeyPrefixArray := strings.Split(queryProjectKeyPrefixArray,",")
 
-	for _,projectKey := range projectKeys{
+	for _,projectKeyPrefix := range projectKeyPrefixArray{
 
-		queryProjectKey := projectKey
+		queryProjectKey := projectKeyPrefix
 
 		if(queryBranchName != ""){
-			queryProjectKey = projectKey + ":" + queryBranchName
+			queryProjectKey = projectKeyPrefix + ":" + queryBranchName
 		}
 
 		checkProjectQualtiyStatus(queryProjectKey)
