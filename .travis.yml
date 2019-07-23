@@ -15,10 +15,10 @@ jobs:
     #   - gradle build
     - stage: code scan
       script:
-      - python ./configsonar.py kai4test0722:moduleA:sonarmodules kai4test0722:moduleA:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
-      - python ./configsonar.py kai4test0722:moduleB:sonarmodules kai4test0722:moduleB:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
+      - python ./configsonar.py kai4test0722:ModuleA-kai:sonarmodules kai4test0722:ModuleA-kai:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
+      - python ./configsonar.py kai4test0722:ModuleB-kai:sonarmodules kai4test0722:ModuleB-kai:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
       # - sonar-scanner -Dsonar.java.source=./src -Dsonar.projectName=$SONAR_ORG:javaclientdebug' '$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:javaclientdebug:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
-      - gradle sonarqube --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=master
+      - gradle sonarqube --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master
       - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclientdebug -BranchName=$TRAVIS_BRANCH
     # - stage: smoke test
     #   script:
