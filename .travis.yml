@@ -15,13 +15,13 @@ jobs:
     #   - gradle build
     - stage: code scan
       script:
-      - python ./configsonar.py kai4test0722 kai4test0722 $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
-      - python ./configsonar.py kai4test0722:sonarmodules kai4test0722:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
-      - python ./configsonar.py kai4test0722:moduleA:sonarmodules kai4test0722:moduleA:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
-      - python ./configsonar.py kai4test0722:moduleB:sonarmodules kai4test0722:moduleB:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
+      - python ./configsonar.py kai4test0723 kai4test0723 $SONAR_ORG javaclientgate0723 $SONAR_TOKEN
+      #- python ./configsonar.py kai4test0722:sonarmodules kai4test0722:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
+      #- python ./configsonar.py kai4test0722:moduleA:sonarmodules kai4test0722:moduleA:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
+      #- python ./configsonar.py kai4test0722:moduleB:sonarmodules kai4test0722:moduleB:sonarmodules $SONAR_ORG javaclientgate0722 $SONAR_TOKEN
       # - sonar-scanner -Dsonar.java.source=./src -Dsonar.projectName=$SONAR_ORG:javaclientdebug' '$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:javaclientdebug:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io  -Dsonar.organization=$SONAR_ORG     
       - gradle sonarqube  --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master --info
-      - chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclientdebug -BranchName=$TRAVIS_BRANCH
+      #- chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:javaclientdebug -BranchName=$TRAVIS_BRANCH
     # - stage: smoke test
     #   script:
     #   - git clone --branch=server https://github.com/singleton-demo/ci.git server
