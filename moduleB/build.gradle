@@ -4,7 +4,7 @@ apply plugin: 'org.sonarqube'
 
 version 'unspecified'
 
-archivesBaseName = 'ModuleB-kai'
+archivesBaseName = 'moduleB'
 
 sourceCompatibility = 1.8
 // In this section you declare where to find the dependencies of your project
