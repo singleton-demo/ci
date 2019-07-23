@@ -26,7 +26,7 @@ jobs:
       script:
       - python ./configsonar.py singleton-service $SONAR_ORG:singleton:service $SONAR_ORG service-gate $SONAR_TOKEN
       - cd ws
-      - gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master
+      - gradle sonarqube --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master --info
       # - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master -Dsonar.qualitygate=modulegate
       - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton:service -BranchName=$TRAVIS_BRANCH
     # - stage: auto test
