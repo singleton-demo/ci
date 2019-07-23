@@ -24,11 +24,12 @@ jobs:
     #   - gradle build
     - stage: code scan
       script:
-      - python ./configsonar.py singleton-service $SONAR_ORG:singleton:service $SONAR_ORG service-gate $SONAR_TOKEN
+      - python ./configsonar.py singleton-service $SONAR_ORG:singleton-service:$TRAVIS_BRANCH $SONAR_ORG service-gate $SONAR_TOKEN
       - cd ws
+      - sed -i "" "s/singleton-service/$SONAR_ORG:singleton-service:$TRAVIS_BRANCH/" settings.gradle
       - gradle sonarqube --stacktrace -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master --info
       # - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master -Dsonar.qualitygate=modulegate
-      - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton:service -BranchName=$TRAVIS_BRANCH
+      - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton-service:$TRAVIS_BRANCH
     # - stage: auto test
     #   script:
     #   - cd build && jar -cvf0m service.jar ./META-INF/MANIFEST.MF ./org/ ./BOOT-INF/ ./resources.zip
