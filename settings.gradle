@@ -1,5 +1,5 @@
 rootProject.name = 'kai4test0722'
 
-include 'moduleA'
-include 'moduleB'
+include ':ModuleA-kai'
+include ':ModuleB-kai'
 
