@@ -18,26 +18,27 @@ install:
   - sudo pip3 install requests
 jobs:
   include:
-    - stage: unit test
-      script:
-      - cd server
-      - gradle build
+    # - stage: unit test
+    #   script:
+    #   - cd server
+    #   - gradle build
     - stage: code scan
       script:
-      - python ./configsonar.py $SONAR_ORG:singleton+' '+$TRAVIS_BRANCH $SONAR_ORG:singleton:$TRAVIS_BRANCH $SONAR_ORG testgate $SONAR_TOKEN
-      - cd server
-      - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:singleton -Dsonar.projectKey=$SONAR_ORG:singleton -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch=$TRAVIS_BRANCH -Dsonar.qualitygate=server-gate
-      - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton -BranchName=$TRAVIS_BRANCH
-    - stage: auto test
-      script:
-      - cd build && jar -cvf0m service.jar ./META-INF/MANIFEST.MF ./org/ ./BOOT-INF/ ./resources.zip
-      - cp service.jar ../
-      - cd ..
-      - docker build -t singleton .
-      - docker run -d -p 8090:8090 --name singleton singleton
-      - docker ps
-      - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
-      - ls
-      - cd devops/autotest/server/APITest && gradle build
-      - docker cp l10n singleton:/
-      - java -cp "target/*:resource/*" org.testng.TestNG testng.xml
+      - python ./configsonar.py singleton-service $SONAR_ORG:singleton:service $SONAR_ORG service-gate $SONAR_TOKEN
+      - cd ws
+      - gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master
+      # - gradle sonarqube -Dsonar.projectName=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.projectKey=$SONAR_ORG:singleton:$TRAVIS_BRANCH -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORG -Dsonar.branch.name=master -Dsonar.qualitygate=modulegate
+      - cd .. && chmod 777 checkSonarQualityGateByAPI && ./checkSonarQualityGateByAPI -ProjectKeys=$SONAR_ORG:singleton:service -BranchName=$TRAVIS_BRANCH
+    # - stage: auto test
+    #   script:
+    #   - cd build && jar -cvf0m service.jar ./META-INF/MANIFEST.MF ./org/ ./BOOT-INF/ ./resources.zip
+    #   - cp service.jar ../
+    #   - cd ..
+    #   - docker build -t singleton .
+    #   - docker run -d -p 8090:8090 --name singleton singleton
+    #   - docker ps
+    #   - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
+    #   - ls
+    #   - cd devops/autotest/server/APITest && gradle build
+    #   - docker cp l10n singleton:/
+    #   - java -cp "target/*:resource/*" org.testng.TestNG testng.xml

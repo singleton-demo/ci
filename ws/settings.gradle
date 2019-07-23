@@ -15,7 +15,7 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'devops-test'
+rootProject.name = 'singleton-service'
 include ':common'
 include ':module1'
 include ':module2'
