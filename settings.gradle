@@ -1,4 +1,4 @@
-rootProject.name = 'kai4test0722'
+rootProject.name = 'kai4test0723'
 
 include ':moduleA'
 include ':moduleB'
