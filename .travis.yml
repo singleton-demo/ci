@@ -30,7 +30,7 @@ jobs:
         - git clone --branch=server https://github.com/singleton-demo/ci.git server
         - git clone --branch=devops https://github.com/singleton-demo/ci.git devops
         - cd ./server/build && rm -rf ./BOOT-INF/classes/l10n/bundles/* && rm -f ./resources.zip
-        - cp -a ../../devops/ci/test/bundles/JSCoreSDKTest ./BOOT-INF/classes/l10n/bundles/
+        - cp -a ../../devops/test/bundles/JSCoreSDKTest ./BOOT-INF/classes/l10n/bundles/
         - cd BOOT-INF/classes && zip -r ../../resources.zip l10n && cd ../..
         - jar -cvf0m service.jar ./META-INF/MANIFEST.MF ./org/ ./BOOT-INF/ ./resources.zip
         - cp service.jar ../
