@@ -44,9 +44,9 @@ be done to setup CI pipeline in your fork repository.
     
 ##### CI Pipeline Result
 
-After you finished above configurations, you can commit code and push to your fork repository. It will trigger CI on Travis, you can login Travis CI to see result. You can login SonarCloud.io to see code scan details.
+After you finished above configurations, you can commit and push code to your fork repository. It will trigger CI on Travis, you can login Travis to see result. You can login SonarCloud.io to see code scan details.
 
-The sonar project and quality gate will be created automatically, project name should like: <SONAR_ORG>:<sub-project name>:<branch>. Quality gate name should like: singleton:<sub-project name>-gate
+The sonar project and quality gate will be created automatically, project name should like: <SONAR_ORG>:\<sub-project name\>:\<branch>. Quality gate name should like: singleton:\<sub-project name\>-gate
 
 ##### Dependabot Preview(A Github APP owned by Github which provide dependencies scan) Configuration
 
