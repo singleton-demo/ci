@@ -15,7 +15,7 @@ People can only commit changes on fork repository then open a pull request to Si
 
 We have sub projects in each branch:
 
-| branch         | purpose |
+|      branch    | purpose |
 |----------------|---------|
 |   master       | Singleton service code  |
 |   java-client  | Singleton java client code  |
