@@ -9,17 +9,25 @@ Welcome ......
 
 ### Fork Repository
 
-### Repository Structure
+People can only commit changes on fork repository then open a pull request to Singleton repository, so please fork this repository first.
 
 ### Branch
 
-### Develop
+We have sub projects in each branch:
+
+master : Singleton service code
+
+java-client : Singleton java client code
+
+js-client : Singleton js client code
+
+devops : CI and automation testing code, it is not place to contribute code unless you want to add CI or test scripts.
+
+## Contribute flow
 
 
-### Test CI Pipeline
-Singleton use Travis-ci as CI framework and help contributor to 
-test their code change as early as possible. Some configuration need to 
-be done to setup CI pipeline in your fork repository.
+### Setup CI Pipeline
+Singleton use Travis-ci as CI framework and help contributor to test their code change as early as possible. Some configuration need to be done to setup CI pipeline in your fork repository.
 
 ##### SonarCloud Configuration
 1. Generate Sonar Token
@@ -48,7 +56,11 @@ After you finished above configurations, you can commit and push code to your fo
 
 The sonar project and quality gate will be created automatically, project name should like: <SONAR_ORG>:\<sub-project name\>:\<branch>. Quality gate name should like: singleton:\<sub-project name\>-gate
 
-##### Dependabot Preview(A Github APP owned by Github which provide dependencies scan) Configuration
+#### Vulnerable Scan
+
+We use Dependabot Preview(A Github APP owned by Github which provide dependencies scan) to do vulnerable scan
+
+#### Configuration
 
 1. Login to Github, click 'Marketplace' in navigation on top.
 
@@ -63,3 +75,8 @@ The sonar project and quality gate will be created automatically, project name s
 6. After the set up, the Dependabot Preview will scan the open dependencies in your project automatically, if any vulnerability found, pull requests with detailed info and auto fix will be created for the repo, please keep eye on it.
 
 ### Pull Request
+
+You can open a PR after you get pass result of CI pipeline. CI pipeline will run again for this PR, then you can wait for review and merge.
+
+
+
