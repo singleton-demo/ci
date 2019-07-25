@@ -15,13 +15,13 @@ People can only commit changes on fork repository then open a pull request to Si
 
 We have sub projects in each branch:
 
-master : Singleton service code
+| branch      | purpose |
+|-------------|---------|
+| master      | Singleton service code  |
+| java-client | Singleton java client code  |
+| js-client   | Singleton js client code  |
+| devops      | CI and automation testing code, it is not place to contribute code unless you want to add CI or test scripts.  |
 
-java-client : Singleton java client code
-
-js-client : Singleton js client code
-
-devops : CI and automation testing code, it is not place to contribute code unless you want to add CI or test scripts.
 
 ## Contribute flow
 
