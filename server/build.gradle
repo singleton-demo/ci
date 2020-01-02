@@ -28,6 +28,6 @@ dependencies {
     implementation 'com.google.guava:guava:23.0'
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     compile group: 'log4j', name: 'log4j', version:'1.2.12'
 }
